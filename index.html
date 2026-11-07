@@ -1,0 +1,1051 @@
+<!doctype html>
+<!--
+  Sumanth Namburi — The Other Side Of Nine
+  Single-file website: all HTML, CSS and JavaScript live in this file.
+  Images and fonts are in ./assets. Open this file directly in a browser.
+
+  REVIEW MODE: the class "review" on <html> shows draft / unapproved content
+  with "Awaiting approval" markers. Remove it (and the robots noindex meta)
+  for the public launch — unapproved content is then hidden automatically.
+-->
+<html lang="en-IN" class="review">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Other Side Of Nine — Sumanth Namburi</title>
+<meta name="description" content="Sumanth Namburi’s debut book, The Other Side Of Nine: Discover the Hidden Truth Behind Every Perspective. Published by Clever Fox Publishing in paperback and Kindle.">
+<meta name="author" content="Sumanth Namburi">
+<!-- Remove for launch: keeps the review build out of search engines -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#101114">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="book">
+<meta property="og:title" content="The Other Side Of Nine — Sumanth Namburi">
+<meta property="og:description" content="Discover the Hidden Truth Behind Every Perspective.">
+<!-- Social platforms need an absolute URL: replace with https://YOUR-DOMAIN/assets/images/og.jpg once the domain is confirmed -->
+<meta property="og:image" content="assets/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-253%20-810%20899%20899%22%3E%3Crect%20x%3D%22-253%22%20y%3D%22-810%22%20width%3D%22899%22%20height%3D%22899%22%20rx%3D%22198%22%20fill%3D%22%23101114%22/%3E%3Cpath%20transform%3D%22scale%281%20-1%29%22%20fill%3D%22%23bda47d%22%20d%3D%22M90%20-8Q80%20-10%2075.5%20-6.0Q71%20-2%2071%204Q71%2013%2082%2018Q159%2047%20209.0%20115.5Q259%20184%20278%20302Q280%20310%20276.0%20312.0Q272%20314%20266%20309Q235%20285%20190%20285Q143%20285%20106.0%20314.0Q69%20343%2047.5%20392.5Q26%20442%2026%20502Q26%20563%2049.0%20614.5Q72%20666%20110.5%20698.0Q149%20730%20196%20730Q247%20730%20285.0%20696.0Q323%20662%20344.5%20601.5Q366%20541%20366%20460Q366%20336%20328.5%20237.5Q291%20139%20228.5%2076.0Q166%2013%2090%20-8ZM98%20507Q98%20310%20191%20310Q242%20310%20268.0%20363.0Q294%20416%20294%20513Q294%20606%20269.5%20654.5Q245%20703%20195%20703Q98%20703%2098%20507Z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<script>
+  /* Runs before first paint. Enables motion-dependent initial states only when
+     JavaScript runs, and shows the intro veil once per session. */
+  (function () {
+    var d = document.documentElement;
+    d.classList.add("js-motion");
+    try {
+      if (sessionStorage.getItem("osn-intro")) d.classList.add("intro-seen");
+      else sessionStorage.setItem("osn-intro", "1");
+    } catch (e) {}
+    var skip = function () {
+      d.classList.add("intro-skip");
+      removeEventListener("keydown", skip);
+      removeEventListener("pointerdown", skip);
+    };
+    addEventListener("keydown", skip);
+    addEventListener("pointerdown", skip);
+    setTimeout(skip, 1600);
+  })();
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Book", "name": "The Other Side Of Nine", "alternativeHeadline": "Discover the Hidden Truth Behind Every Perspective", "author": {"@type": "Person", "name": "Sumanth Namburi", "alternateName": "N. S. Sumanth Namburi"}, "publisher": {"@type": "Organization", "name": "Clever Fox Publishing"}, "datePublished": "2026-09", "inLanguage": "en", "workExample": [{"@type": "Book", "bookFormat": "https://schema.org/Paperback", "isbn": "9789375008668", "numberOfPages": 354, "url": "https://www.amazon.com/dp/9375008665"}, {"@type": "Book", "bookFormat": "https://schema.org/EBook", "url": "https://www.amazon.in/dp/B0HJ8R9GXW"}]}, {"@type": "Person", "name": "Sumanth Namburi", "alternateName": "N. S. Sumanth Namburi"}]}</script>
+
+<style>
+/* ═══════════════════════════ FONTS ═══════════════════════════
+   Instrument Serif & Inter — SIL Open Font License 1.1 */
+@font-face { font-family: "Instrument Serif"; src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+/* ═══════════════════════════ TOKENS ═══════════════════════════
+   Obsidian and ivory alternate as environments. Champagne is a rare accent. */
+:root {
+  --obsidian: #101114;
+  --graphite: #27282b;
+  --ivory: #eee9de;
+  --silver: #b8b6b1;
+  --stone: #5f5d58;          /* muted text on ivory (AA contrast) */
+  --champagne: #bda47d;
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --header-h: 4rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { background: var(--obsidian); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  background: var(--obsidian); color: var(--ivory);
+  font-family: var(--sans); font-size: 1rem; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility; overflow-x: clip;
+}
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { list-style: none; }
+::selection { background: var(--champagne); color: var(--obsidian); }
+section[id] { scroll-margin-top: var(--header-h); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Environments */
+.env-dark  { background: var(--obsidian); color: var(--ivory); --muted: var(--silver); --hairline: rgb(238 233 222 / 0.14); }
+.env-light { background: var(--ivory); color: var(--obsidian); --muted: var(--stone); --hairline: rgb(16 17 20 / 0.14); color-scheme: light; }
+
+/* Layout */
+.shell { width: 100%; max-width: 88rem; margin-inline: auto; padding-inline: var(--gutter); }
+.grid12 { display: grid; gap: 3.5rem; }
+@media (min-width: 768px) { .grid12 { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; } }
+.pad { padding-block: 7rem; }
+@media (min-width: 768px) { .pad { padding-block: 10rem; } }
+.center-items { align-items: center; }
+
+/* Typography */
+.display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; line-height: 0.95; text-wrap: balance; }
+.italic { font-style: italic; }
+.eyebrow { font-family: var(--sans); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: clamp(1.0625rem, 1.2vw + 0.6rem, 1.375rem); line-height: 1.55; color: var(--muted); max-width: 38rem; text-wrap: pretty; }
+.prose p { line-height: 1.7; color: var(--muted); max-width: 36rem; text-wrap: pretty; }
+.prose p + p { margin-top: 1.1em; }
+.muted { color: var(--muted); }
+.champagne { color: var(--champagne); }
+.silver { color: var(--silver); }
+.h-xl { font-size: clamp(2.75rem, 6vw, 5.5rem); }
+.h-lg { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+.mt-1 { margin-top: .75rem; } .mt-2 { margin-top: 1.5rem; } .mt-3 { margin-top: 2.5rem; } .mt-4 { margin-top: 3.5rem; } .mb-1 { margin-bottom: 1.25rem; } .mb-2 { margin-bottom: 1.5rem; }
+
+/* Focus — visible, calm, consistent */
+:focus-visible { outline: 2px solid var(--champagne); outline-offset: 3px; border-radius: 2px; }
+.env-light :focus-visible { outline-color: var(--graphite); }
+.skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 100; background: var(--ivory); color: var(--obsidian); padding: .75rem 1rem; font-size: .875rem; transition: top .2s var(--ease-out); }
+.skip-link:focus { top: 1rem; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  min-height: 3rem; padding: 0 1.5rem; border-radius: 999px;
+  font-size: .8125rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  transition: background-color .3s var(--ease-out), border-color .3s var(--ease-out), transform .2s var(--ease-out);
+}
+.btn:active { transform: scale(.98); }
+.btn svg { transition: transform .3s var(--ease-out); flex: none; }
+.btn:hover svg { transform: translate(2px, -2px); }
+.btn-primary { background: var(--ivory); color: var(--obsidian); }
+.btn-primary:hover { background: #fff; }
+.btn-ghost { border: 1px solid rgb(238 233 222 / .35); color: var(--ivory); }
+.btn-ghost:hover { border-color: var(--ivory); background: rgb(238 233 222 / .05); }
+.env-light .btn-primary { background: var(--obsidian); color: var(--ivory); }
+.env-light .btn-primary:hover { background: var(--graphite); }
+.env-light .btn-ghost { border-color: rgb(16 17 20 / .3); color: var(--obsidian); }
+.env-light .btn-ghost:hover { border-color: var(--obsidian); background: rgb(16 17 20 / .05); }
+.buy { display: flex; flex-direction: column; gap: .75rem; }
+.buy .btn { width: 100%; }
+@media (min-width: 640px) { .buy { flex-direction: row; flex-wrap: wrap; } .buy .btn { width: auto; } .buy.centered { justify-content: center; } }
+.text-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; }
+.text-link span { transition: transform .3s var(--ease-out); }
+.text-link:hover span { transform: translateX(4px); }
+
+/* Review-mode marker */
+.draft {
+  display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap;
+  font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  padding: .3rem .55rem; border: 1px dashed currentColor; border-radius: 999px; color: #c98a4b;
+}
+.draft::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.env-light .draft { color: #8a4f17; }
+html:not(.review) .pending { display: none !important; }
+html.review .launch-only { display: none !important; }
+
+/* Scroll reveal (only hidden when JS + motion are available) */
+.js-motion [data-reveal] { opacity: 0; transform: translateY(24px); }
+.no-motion [data-reveal] { opacity: 1 !important; transform: none !important; }
+
+/* ═══════════════════════════ PRELOADER ═══════════════════════════
+   CSS only: ends by itself, never blocks interaction, once per session. */
+.preloader { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; background: var(--obsidian); pointer-events: none; animation: veil-out .5s var(--ease-io) .95s forwards; }
+.preloader svg { height: 3.5rem; width: auto; animation: glyph-turn .8s var(--ease-io) .12s both; }
+.preloader .eyebrow { position: absolute; bottom: 2rem; right: var(--gutter); }
+@keyframes glyph-turn { from { transform: rotate(0); opacity: 0; } 20% { opacity: 1; } to { transform: rotate(180deg); opacity: 1; } }
+@keyframes veil-out { to { opacity: 0; visibility: hidden; } }
+.intro-seen .preloader, .intro-skip .preloader { display: none; }
+
+/* ═══════════════════════════ HEADER ═══════════════════════════ */
+.site-header { position: fixed; inset: 0 0 auto; z-index: 50; border-bottom: 1px solid transparent; transition: background-color .5s var(--ease-out), border-color .5s var(--ease-out), backdrop-filter .5s; }
+.site-header.scrolled, .site-header.menu-open { background: rgb(16 17 20 / .9); border-color: rgb(238 233 222 / .1); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); }
+.site-header .shell { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
+.wordmark { font-family: var(--serif); font-size: 1.375rem; line-height: 1; letter-spacing: -.01em; }
+.nav { display: none; gap: 2rem; }
+@media (min-width: 768px) { .nav { display: flex; } }
+.nav a { position: relative; padding: .5rem 0; font-size: .8125rem; letter-spacing: .02em; color: var(--silver); transition: color .3s; }
+.nav a:hover, .nav a[aria-current="true"] { color: var(--ivory); }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease-out); }
+.nav a:hover::after, .nav a[aria-current="true"]::after { transform: scaleX(1); }
+.menu-btn { width: 2.75rem; height: 2.75rem; margin-right: -.5rem; display: flex; align-items: center; justify-content: center; }
+@media (min-width: 768px) { .menu-btn { display: none; } }
+.menu-btn i { position: relative; display: block; width: 1.25rem; height: .75rem; }
+.menu-btn i::before, .menu-btn i::after { content: ""; position: absolute; left: 0; width: 100%; height: 1px; background: currentColor; transition: transform .5s var(--ease-out), top .5s var(--ease-out); }
+.menu-btn i::before { top: 0; } .menu-btn i::after { top: .75rem; }
+.menu-open .menu-btn i::before { top: .375rem; transform: rotate(45deg); }
+.menu-open .menu-btn i::after { top: .375rem; transform: rotate(-45deg); }
+.mobile-menu { position: fixed; inset: var(--header-h) 0 0; z-index: 50; overflow-y: auto; }
+.mobile-menu[hidden] { display: none; }
+.mobile-menu nav { min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem var(--gutter) 2.5rem; }
+.mobile-menu li { border-bottom: 1px solid rgb(238 233 222 / .1); }
+.mobile-menu a { display: flex; align-items: baseline; justify-content: space-between; padding: 1rem 0; font-family: var(--serif); font-size: 2.5rem; line-height: 1; }
+.mobile-menu a small { font-family: var(--sans); font-size: .75rem; letter-spacing: .2em; color: var(--silver); }
+@media (min-width: 768px) { .mobile-menu { display: none !important; } }
+
+/* ═══════════════════════════ HERO ═══════════════════════════ */
+.hero { position: relative; }
+.hero.cinematic { height: 480vh; }
+@media (max-width: 767px) { .hero.cinematic { height: 340vh; } }
+.hero-frame { position: relative; height: 100vh; height: 100svh; min-height: 600px; width: 100%; overflow: hidden; }
+.hero.cinematic .hero-frame { position: sticky; top: 0; }
+.static-art { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 14svh; transition: opacity 1.4s var(--ease-out); }
+.static-art svg { height: 44svh; width: auto; opacity: .9; }
+@media (min-width: 768px) { .static-art { align-items: center; justify-content: flex-end; padding: 0 10vw 0 0; } .static-art svg { height: 78svh; } }
+.scene { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s var(--ease-out); }
+.scene canvas { width: 100% !important; height: 100% !important; }
+.hero.ready .scene { opacity: 1; }
+.hero.ready .static-art { opacity: 0; }
+.hero-veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgb(16 17 20 / .96) 0%, rgb(16 17 20 / .75) 45%, transparent 70%); }
+@media (min-width: 768px) { .hero-veil { background: linear-gradient(to top, rgb(16 17 20 / .92) 0%, rgb(16 17 20 / .35) 38%, transparent 62%); } }
+.hero-intro { position: absolute; inset: auto 0 0; padding-bottom: max(2.5rem, 7svh); }
+.hero h1 { font-size: clamp(3.25rem, 11vw, 10.5rem); }
+.line-mask { display: block; overflow: hidden; padding-bottom: .07em; }
+.line-mask > span { display: block; }
+.hero-bottom { margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem; }
+@media (min-width: 768px) { .hero-bottom { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+.hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; }
+.hero-ctas .btn { padding: 0 1.75rem; }
+.captions { position: absolute; inset: 0; pointer-events: none; display: none; }
+.hero.cinematic .captions, .hero.cinematic .rail, .hero.cinematic .cue { display: block; }
+.caption { position: absolute; inset: 13svh 0 auto; text-align: center; opacity: 0; visibility: hidden; }
+@media (min-width: 768px) { .caption { top: 12svh; } }
+.caption .display { max-width: 18ch; margin: 1rem auto 0; padding: 0 1.5rem; font-size: clamp(2rem, 4.6vw, 4.25rem); }
+.finale { position: absolute; inset: auto 0 10svh; padding: 0 1.5rem; text-align: center; font-size: clamp(2.4rem, 6.4vw, 6.5rem); }
+.finale .w { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.finale .w > span { display: inline-block; opacity: 0; visibility: hidden; }
+.rail { display: none; position: absolute; right: var(--gutter); top: 50%; width: 1px; height: 10rem; transform: translateY(-50%); background: rgb(238 233 222 / .15); }
+.rail div { height: 100%; background: var(--champagne); transform-origin: top; transform: scaleY(0); }
+.cue { display: none; position: absolute; bottom: 1.5rem; right: var(--gutter); }
+@media (max-width: 767px) { .hero.cinematic .rail, .hero.cinematic .cue { display: none; } }
+.seq-static { border-top: 1px solid var(--hairline); padding-block: 4rem; }
+.hero.cinematic .seq-static { display: none; }
+.seq-static ol { display: grid; gap: 2.5rem; }
+@media (min-width: 768px) { .seq-static { padding-block: 6rem; } .seq-static ol { grid-template-columns: repeat(3, 1fr); } }
+.seq-static .display { font-size: 2rem; margin-top: .75rem; }
+
+/* ═══════════════════════════ QUESTION ═══════════════════════════ */
+@media (min-width: 768px) { .q-text { grid-column: 1 / span 5; } .q-art { grid-column: 7 / span 6; } }
+.split { position: relative; display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 5 / 4; overflow: hidden; border-radius: 4px; }
+.split figure { position: relative; display: flex; align-items: center; justify-content: center; }
+.split figure:last-of-type { background: #e4ddcf; color: var(--obsidian); --muted: var(--stone); }
+.split svg { height: 56%; width: auto; }
+.split figcaption { position: absolute; bottom: 1.5rem; }
+.split .divider { position: absolute; inset: 0 auto 0 50%; width: 1px; background: var(--champagne); transform-origin: top; }
+
+/* ═══════════════════════════ BOOK ═══════════════════════════ */
+.book { position: relative; overflow: hidden; }
+.book-glow { position: absolute; left: 8%; top: 50%; width: 70vmin; height: 70vmin; transform: translateY(-50%); border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgb(189 164 125 / .16), transparent); }
+.book .grid12 { position: relative; align-items: start; }
+.book-cover-col { width: min(72vw, 24rem); margin-inline: auto; }
+@media (min-width: 768px) { .book-cover-col { grid-column: 1 / span 5; width: 100%; max-width: 26rem; position: sticky; top: calc(var(--header-h) + 3rem); } .book-text { grid-column: 7 / span 6; } }
+.cover-stage { perspective: 1400px; }
+.cover-3d { transform-style: preserve-3d; will-change: transform; }
+.cover { position: relative; }
+.cover::before { content: ""; position: absolute; left: 6%; right: 6%; bottom: -4%; height: 12%; border-radius: 50%; background: rgb(0 0 0 / .55); filter: blur(24px); }
+.cover-img { position: relative; overflow: hidden; border-radius: 3px; box-shadow: inset 0 1px 0 rgb(255 255 255 / .08), 0 40px 80px -30px rgb(0 0 0 / .65); }
+.cover-img img { width: 100%; height: auto; }
+.cover-img::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 3%; background: linear-gradient(to right, rgb(0 0 0 / .3), transparent); pointer-events: none; }
+.cover figcaption { margin-top: 1.25rem; display: flex; justify-content: center; }
+.book h2 { font-size: clamp(2.75rem, 5.4vw, 5rem); }
+.subtitle { margin-top: 1rem; font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem, 2.4vw, 1.875rem); color: var(--silver); line-height: 1.2; }
+.specs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; border-top: 1px solid var(--hairline); font-size: .875rem; }
+.specs div { border-bottom: 1px solid var(--hairline); padding: 1rem 0; }
+.specs dt { margin-bottom: .375rem; }
+.specs dd { font-variant-numeric: tabular-nums; }
+.pullquote { border-left: 1px solid rgb(189 164 125 / .6); padding-left: 1.5rem; }
+.pullquote p { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.pullquote footer { margin-top: .75rem; font-size: .875rem; color: var(--silver); }
+.where li { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--hairline); }
+.where { border-top: 1px solid var(--hairline); }
+.where a { font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-decoration-color: rgb(238 233 222 / .3); text-underline-offset: 4px; }
+.where a:hover { text-decoration-color: var(--ivory); }
+.small { font-size: .75rem; }
+
+/* ═══════════════════════════ THEMES ═══════════════════════════ */
+@media (min-width: 768px) { .sec-head .eyebrow { grid-column: 1 / span 3; } .sec-head h2 { grid-column: 4 / span 8; } }
+.sec-head { gap: 1.5rem; }
+.themes { display: grid; border-top: 1px solid var(--hairline); margin-top: 4rem; }
+@media (min-width: 640px) { .themes { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .themes { grid-template-columns: repeat(3, 1fr); margin-top: 6rem; } .themes li:nth-child(3n+2) { padding-inline: 2.5rem; } .themes li:nth-child(3n) { padding-left: 2.5rem; } }
+.themes li { padding: 2.5rem 2.5rem 2.5rem 0; border-bottom: 1px solid var(--hairline); }
+.themes h3 { margin-top: 1.5rem; font-size: 2.25rem; transition: transform .7s var(--ease-out); }
+.themes li:hover h3 { transform: translateX(4px); }
+.themes p { margin-top: .75rem; max-width: 20rem; font-size: .9375rem; line-height: 1.6; }
+
+/* ═══════════════════════════ PHILOSOPHY ═══════════════════════════ */
+.sss { border-block: 1px solid var(--hairline); padding-block: 3rem; }
+@media (min-width: 768px) { .sss { padding-block: 4rem; } }
+.sss .display { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .35em; font-size: clamp(2.75rem, 8vw, 7.5rem); }
+.concepts { display: grid; }
+@media (min-width: 768px) { .concepts { grid-template-columns: repeat(3, 1fr); } .concepts li + li { padding-left: 2.5rem; } .concepts li { padding-right: 2.5rem; } }
+.concepts li { padding-block: 2.5rem; border-bottom: 1px solid var(--hairline); }
+.concepts .mark { font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--champagne); }
+.concepts .mark sup { margin-left: .04em; vertical-align: .9em; font-family: var(--sans); font-size: .22em; letter-spacing: 0; }
+.concepts .name { margin-top: 1rem; font-size: 1.125rem; }
+.stack { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
+
+/* ═══════════════════════════ AUTHOR ═══════════════════════════ */
+.author .grid12 { align-items: start; }
+@media (min-width: 768px) { .portrait-col { grid-column: 1 / span 5; position: sticky; top: calc(var(--header-h) + 3rem); } .author-text { grid-column: 7 / span 6; } }
+.portrait { position: relative; aspect-ratio: 4 / 5; border: 1px solid var(--hairline); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.portrait .display { font-size: clamp(5rem, 12vw, 9rem); color: var(--muted); opacity: .4; }
+.portrait .draft { position: absolute; bottom: 1.5rem; }
+.author h2 { font-size: clamp(3rem, 6vw, 5.5rem); }
+.facts { border-top: 1px solid var(--hairline); }
+.facts div { display: grid; gap: .5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--hairline); }
+@media (min-width: 640px) { .facts div { grid-template-columns: 1fr 2fr; } }
+.facts dt { padding-top: .2rem; }
+.facts dd span { display: block; margin-top: .25rem; font-size: .75rem; color: var(--muted); }
+.row-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+
+/* ═══════════════════════════ PRESS ═══════════════════════════ */
+.press-list { border-top: 1px solid var(--hairline); }
+.press-list > li { display: grid; gap: 1.5rem; padding-block: 2.5rem; border-bottom: 1px solid var(--hairline); }
+@media (min-width: 768px) { .press-list > li { grid-template-columns: repeat(12, 1fr); } .press-list .eyebrow { grid-column: 1 / span 3; } .press-list .body { grid-column: 4 / span 8; } }
+.press-list h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.outlets { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: 1.25rem; font-size: .875rem; }
+.outlets a { text-decoration: underline; text-decoration-color: var(--hairline); text-underline-offset: 4px; }
+.outlets a:hover { text-decoration-color: currentColor; }
+
+/* ═══════════════════════════ CONTACT + INSIGHTS ═══════════════════════════ */
+.twin { display: grid; border-top: 1px solid var(--hairline); margin-top: 4rem; }
+@media (min-width: 768px) { .twin { grid-template-columns: 1fr 1fr; } .twin > div + div { border-left: 1px solid var(--hairline); padding-left: 2.5rem; } .twin > div { padding-right: 2.5rem; } }
+.twin > div { padding-block: 3rem; border-bottom: 1px solid var(--hairline); }
+.twin .display { font-size: clamp(2rem, 3.4vw, 3rem); margin-top: 1.25rem; }
+
+/* ═══════════════════════════ CLOSING + FOOTER ═══════════════════════════ */
+.closing { text-align: center; padding-block: 8rem; border-top: 1px solid rgb(238 233 222 / .1); }
+@media (min-width: 768px) { .closing { padding-block: 12rem; } }
+.closing h2 { max-width: 14ch; margin-inline: auto; font-size: clamp(3.25rem, 9vw, 8.5rem); }
+.closing .lede { margin-inline: auto; }
+.footer { border-top: 1px solid rgb(238 233 222 / .1); }
+.footer-top { padding-block: 4rem; }
+@media (min-width: 768px) { .footer-top { padding-block: 5rem; } .footer-brand { grid-column: 1 / span 5; } .footer-nav { grid-column: 6 / span 4; } .footer-contact { grid-column: 10 / span 3; } }
+.footer-nav ul { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1.5rem; font-size: .875rem; }
+.footer-nav a { color: var(--silver); transition: color .3s; }
+.footer-nav a:hover { color: var(--ivory); }
+.footer-bottom { display: flex; flex-direction: column; gap: .5rem; padding-block: 1.5rem; border-top: 1px solid rgb(238 233 222 / .1); font-size: .75rem; color: var(--silver); }
+@media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+
+/* ═══════════════════════════ REDUCED MOTION ═══════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .preloader { display: none; }
+  .js-motion [data-reveal] { opacity: 1; transform: none; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+</head>
+
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- The numeral "9" — outline extracted from Instrument Serif (SIL OFL). Reused everywhere via <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="nine" transform="scale(1 -1)" d="M90 -8Q80 -10 75.5 -6.0Q71 -2 71 4Q71 13 82 18Q159 47 209.0 115.5Q259 184 278 302Q280 310 276.0 312.0Q272 314 266 309Q235 285 190 285Q143 285 106.0 314.0Q69 343 47.5 392.5Q26 442 26 502Q26 563 49.0 614.5Q72 666 110.5 698.0Q149 730 196 730Q247 730 285.0 696.0Q323 662 344.5 601.5Q366 541 366 460Q366 336 328.5 237.5Q291 139 228.5 76.0Q166 13 90 -8ZM98 507Q98 310 191 310Q242 310 268.0 363.0Q294 416 294 513Q294 606 269.5 654.5Q245 703 195 703Q98 703 98 507Z"/>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3d3b4"/><stop offset=".45" stop-color="#bda47d"/><stop offset="1" stop-color="#7d6849"/></linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bda47d" stop-opacity=".38"/><stop offset="1" stop-color="#bda47d" stop-opacity="0"/></linearGradient>
+  </defs>
+</svg>
+
+<!-- Preloader (~1.2 s, once per session, click or any key skips) -->
+<div class="preloader" aria-hidden="true">
+  <svg viewBox="6 -750 380 779"><use href="#nine" fill="#bda47d"/></svg>
+  <span class="eyebrow">Click or press any key to skip</span>
+</div>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="site-header" id="header">
+  <div class="shell">
+    <a href="#top" class="wordmark" aria-label="Sumanth Namburi — back to top">Sumanth Namburi</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#book">The Book</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#author">The Author</a>
+      <a href="#press" class="pending">Press</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="sr-only">Open menu</span><i aria-hidden="true"></i>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu env-dark" id="mobile-menu" hidden>
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#book">The Book <small>01</small></a></li>
+      <li><a href="#philosophy">Philosophy <small>02</small></a></li>
+      <li><a href="#author">The Author <small>03</small></a></li>
+      <li class="pending"><a href="#press">Press <small>04</small></a></li>
+      <li><a href="#contact">Contact <small>05</small></a></li>
+    </ul>
+    <p class="eyebrow mt-3">Perspective changes everything.</p>
+  </nav>
+</div>
+
+<main id="main" tabindex="-1" style="outline:none">
+
+<!-- ═══════════ 1. HERO + SIGNATURE SIX/NINE SEQUENCE ═══════════ -->
+<section class="hero env-dark" id="top" aria-label="The Other Side Of Nine — introduction">
+  <div class="hero-frame">
+    <!-- Static composition: first paint, and the fallback without WebGL / with reduced motion -->
+    <div class="static-art">
+      <svg viewBox="-60 -790 512 1700" role="img" aria-label="A numeral nine, and below it the same form turned to the other side, where it reads as a six.">
+        <use href="#nine" fill="url(#metal)"/>
+        <line x1="-60" x2="452" y1="60" y2="60" stroke="#bda47d" stroke-opacity=".35" stroke-width="1.5"/>
+        <use href="#nine" fill="url(#fade)" transform="translate(0 840) rotate(180 196 -360.67)"/>
+      </svg>
+    </div>
+    <div class="scene" id="scene" aria-hidden="true"></div>
+    <div class="hero-veil" data-veil aria-hidden="true"></div>
+
+    <div class="hero-intro" data-intro>
+      <div class="shell">
+        <p class="eyebrow champagne mb-2" data-fade style="color:var(--champagne)">Perspective changes everything.</p>
+        <h1 class="display">
+          <span class="line-mask"><span data-line>The Other Side</span></span>
+          <span class="line-mask"><span data-line class="italic silver">Of Nine</span></span>
+        </h1>
+        <div class="hero-bottom">
+          <p class="lede" data-fade style="color:rgb(238 233 222 / .8)">Discover the Hidden Truth Behind Every Perspective.</p>
+          <div class="hero-ctas" data-fade>
+            <a href="#book" class="btn btn-primary">Discover the Book</a>
+            <a href="#author" class="text-link">Meet the Author <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="captions" aria-hidden="true">
+      <div class="caption" data-caption="0"><p class="eyebrow">One</p><p class="display">Stand here, and it is a nine.</p></div>
+      <div class="caption" data-caption="1"><p class="eyebrow">Two</p><p class="display">Now walk around it.</p></div>
+      <div class="caption" data-caption="2"><p class="eyebrow">Three</p><p class="display">From the other side, it was always a six.</p></div>
+      <p class="finale display" data-finale>
+        <span class="w"><span>Perspective&nbsp;</span></span><span class="w"><span>changes&nbsp;</span></span><span class="w"><span>everything.</span></span>
+      </p>
+    </div>
+    <div class="rail" aria-hidden="true"><div data-rail></div></div>
+    <p class="cue eyebrow" data-cue aria-hidden="true">Scroll to change perspective</p>
+  </div>
+
+  <!-- The sequence as plain content (no WebGL / reduced motion / no JS). Also read by screen readers. -->
+  <div class="seq-static shell">
+    <ol>
+      <li><p class="eyebrow">One</p><p class="display">Stand here, and it is a nine.</p></li>
+      <li><p class="eyebrow">Two</p><p class="display">Now walk around it.</p></li>
+      <li><p class="eyebrow">Three</p><p class="display">From the other side, it was always a six.</p></li>
+    </ol>
+    <p class="display mt-4" style="font-size:clamp(2.4rem,6vw,5rem)">Perspective changes everything.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 2. THE QUESTION ═══════════ -->
+<section class="env-light pad" id="question" aria-labelledby="question-title">
+  <div class="shell grid12 center-items">
+    <div class="q-text">
+      <p class="eyebrow mb-2" data-reveal>The question</p>
+      <h2 id="question-title" class="display h-xl" data-reveal>What if you’re only seeing one side?</h2>
+      <div class="prose mt-3" data-reveal>
+        <p>Two people can look at the same thing and both be right. One sees a six. The other sees a nine. The difference is not the object — it is where each of them is standing.</p>
+        <p>The book begins with a simple shift: instead of asking whether we are right, asking what we have not yet seen.</p>
+      </div>
+    </div>
+    <div class="q-art" data-reveal>
+      <div class="split" id="split">
+        <figure class="env-dark">
+          <svg viewBox="-34 -790 460 859" aria-hidden="true"><g data-turn="a"><use href="#nine" fill="currentColor"/></g></svg>
+          <figcaption class="eyebrow">This side</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="-34 -790 460 859" aria-hidden="true"><g data-turn="b" transform="rotate(180 196 -360.67)"><use href="#nine" fill="currentColor"/></g></svg>
+          <figcaption class="eyebrow">The other side</figcaption>
+        </figure>
+        <div class="divider" data-divider aria-hidden="true"></div>
+        <p class="sr-only">The same numeral shown from two sides: a nine on one, a six on the other.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. THE BOOK ═══════════ -->
+<section class="book env-dark pad" id="book" aria-labelledby="book-title">
+  <div class="book-glow" aria-hidden="true"></div>
+  <div class="shell grid12">
+    <div class="book-cover-col">
+      <div class="cover-stage" id="cover-stage">
+        <figure class="cover cover-3d" data-book>
+          <div class="cover-img">
+            <img src="assets/images/cover-provisional.jpg" width="699" height="1113" loading="lazy" decoding="async"
+                 alt="Front cover of The Other Side Of Nine by Sumanth Namburi: a bronze numeral nine above the sea, its reflection in the water reading as a six, with a figure standing on each side.">
+          </div>
+          <figcaption class="pending"><span class="draft">Provisional cover — low resolution</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="book-text">
+      <p class="eyebrow mb-2" data-reveal>The book · by Sumanth Namburi</p>
+      <h2 id="book-title" class="display" data-reveal>The Other Side Of Nine</h2>
+      <p class="subtitle" data-reveal>Discover the Hidden Truth Behind Every Perspective.</p>
+
+      <div class="buy mt-3" data-reveal>
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/9375008665" target="_blank" rel="noopener noreferrer">Buy Paperback — Amazon US
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="sr-only"> (opens Amazon in a new tab)</span></a>
+        <a class="btn btn-ghost" href="https://www.amazon.in/dp/B0HJ8R9GXW" target="_blank" rel="noopener noreferrer">Get Kindle Edition — Amazon India
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="sr-only"> (opens Amazon in a new tab)</span></a>
+      </div>
+
+      <div class="prose mt-4 pending" data-reveal>
+        <p class="mb-1"><span class="draft">Draft synopsis — replace with approved text</span></p>
+        <p>Most of what we believe about a situation comes from where we happen to be standing. The Other Side Of Nine is an invitation to walk around it — to notice the view we have not yet taken.</p>
+        <p>Through stories, practical insight and reflections drawn from the Bhagavad Gita, Sumanth Namburi explores how perspective shapes the way we understand people, make decisions, build relationships and grow.</p>
+        <p>It does not ask readers to abandon what they believe. It asks them to widen it.</p>
+      </div>
+
+      <blockquote class="pullquote mt-4" data-reveal>
+        <p class="display">“What have I not yet seen?”</p>
+        <footer>The question at the heart of the book</footer>
+      </blockquote>
+
+      <div class="mt-4" data-reveal>
+        <h3 class="eyebrow mb-1">Details</h3>
+        <dl class="specs">
+          <div><dt class="eyebrow">Publisher</dt><dd>Clever Fox Publishing</dd></div>
+          <div><dt class="eyebrow">Published</dt><dd>September 2026</dd></div>
+          <div><dt class="eyebrow">Length</dt><dd>354 pages</dd></div>
+          <div><dt class="eyebrow">Formats</dt><dd>Paperback · Kindle eBook</dd></div>
+          <div><dt class="eyebrow">ISBN-13</dt><dd>978-93-7500-866-8</dd></div>
+          <div><dt class="eyebrow">ISBN-10</dt><dd>9375008665</dd></div>
+        </dl>
+      </div>
+
+      <div class="mt-4" data-reveal>
+        <h3 class="eyebrow mb-1">Where to buy</h3>
+        <ul class="where">
+          <li><div><p>Paperback</p><p class="small muted">Amazon US</p></div><a href="https://www.amazon.com/dp/9375008665" target="_blank" rel="noopener noreferrer">View on Amazon<span class="sr-only"> — Paperback, Amazon US (opens in a new tab)</span></a></li>
+          <li><div><p>Kindle eBook</p><p class="small muted">Amazon India</p></div><a href="https://www.amazon.in/dp/B0HJ8R9GXW" target="_blank" rel="noopener noreferrer">View on Amazon<span class="sr-only"> — Kindle eBook, Amazon India (opens in a new tab)</span></a></li>
+        </ul>
+        <p class="small muted mt-1">Availability and pricing are set by each store and may vary by region.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. WHAT THE BOOK EXPLORES ═══════════ -->
+<section class="env-light pad" id="themes" aria-labelledby="themes-title">
+  <div class="shell">
+    <div class="grid12 sec-head">
+      <p class="eyebrow" data-reveal>What the book explores</p>
+      <h2 id="themes-title" class="display h-lg" data-reveal>Six ways of looking again.</h2>
+    </div>
+    <ol class="themes">
+      <li data-reveal><span class="eyebrow">01</span><h3 class="display">Perception</h3><p class="muted">How the place we stand decides what we see.</p></li>
+      <li data-reveal><span class="eyebrow">02</span><h3 class="display">Assumptions</h3><p class="muted">The quiet beliefs that arrive before the facts do.</p></li>
+      <li data-reveal><span class="eyebrow">03</span><h3 class="display">Relationships</h3><p class="muted">Seeing the other person’s side of the same moment.</p></li>
+      <li data-reveal><span class="eyebrow">04</span><h3 class="display">Decisions</h3><p class="muted">Choosing better by looking beyond the obvious.</p></li>
+      <li data-reveal><span class="eyebrow">05</span><h3 class="display">Personal growth</h3><p class="muted">Expanding beliefs rather than replacing them.</p></li>
+      <li data-reveal><span class="eyebrow">06</span><h3 class="display">Reflection</h3><p class="muted">Practical habits for pausing and looking again.</p></li>
+    </ol>
+    <p class="small muted mt-2">Themes drawn from the book’s description — not chapter titles.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 5. PHILOSOPHY ═══════════ -->
+<section class="env-dark pad" id="philosophy" aria-labelledby="philosophy-title">
+  <div class="shell">
+    <div class="grid12 sec-head" style="margin-bottom:5rem">
+      <p class="eyebrow" data-reveal>Philosophy</p>
+      <h2 id="philosophy-title" class="display h-lg" data-reveal>Not “Am I right?” — but “What have I not yet seen?”</h2>
+    </div>
+
+    <div class="sss" data-reveal>
+      <p class="eyebrow mb-2">The idea at the centre</p>
+      <p class="display">Self <span class="champagne" aria-hidden="true">·</span> Shift <span class="champagne" aria-hidden="true">·</span> System</p>
+      <div class="stack mt-2 pending">
+        <span class="draft">Draft wording</span>
+        <p class="lede">A broader idea in the book: understand yourself, learn other perspectives, and apply that understanding.</p>
+      </div>
+      <p class="lede mt-2 launch-only">Explained in the book.</p>
+    </div>
+
+    <ul class="concepts">
+      <li data-reveal>
+        <p class="display mark">OSP<sup>TM</sup></p>
+        <div class="pending">
+          <p class="name">The Other Side Principle</p>
+          <div class="stack mt-1"><p class="muted">Seeking what may not yet have been seen.</p><span class="draft">Draft wording</span></div>
+        </div>
+      </li>
+      <li data-reveal>
+        <p class="display mark">NSVBT<sup>TM</sup></p>
+        <div class="pending">
+          <p class="name">New System of Value-Based Thinking Through Perspective</p>
+          <div class="stack mt-1"><p class="muted">Looking for the hidden value inside an experience.</p><span class="draft">Draft wording</span></div>
+        </div>
+      </li>
+      <!-- PQ vs PVQ unresolved: Google Play says "Perspective Quotient (PQ™)", the printed cover says "PVQ™". Held until the author confirms. -->
+      <li data-reveal class="pending">
+        <p class="display mark">PQ<sup>TM</sup> / PVQ<sup>TM</sup></p>
+        <div class="stack mt-1"><span class="draft">Terminology unconfirmed</span><p class="muted">Official term and definition awaiting the author’s confirmation.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ 6. THE AUTHOR ═══════════ -->
+<section class="author env-light pad" id="author" aria-labelledby="author-title">
+  <div class="shell grid12">
+    <div class="portrait-col" data-reveal>
+      <!-- Replace with an approved portrait: <img src="assets/images/author.jpg" alt="Sumanth Namburi" ...>. Never an AI-generated likeness. -->
+      <div class="portrait">
+        <span class="display" aria-hidden="true">SN</span>
+        <span class="draft pending">Portrait to be supplied</span>
+        <span class="sr-only">Author portrait to follow.</span>
+      </div>
+    </div>
+    <div class="author-text">
+      <p class="eyebrow mb-2" data-reveal>The author</p>
+      <h2 id="author-title" class="display" data-reveal>Sumanth Namburi</h2>
+      <div class="prose mt-3" data-reveal>
+        <p class="pending mb-1"><span class="draft">Draft biography</span></p>
+        <p class="pending" style="color:var(--obsidian);font-size:1.125rem">Sumanth Namburi is an author, entrepreneur and artist whose work explores how perspective shapes the way people understand experiences, relationships and decisions. Drawing on experiences across business, education and community service, his debut book, The Other Side Of Nine, invites readers to pause, question assumptions and consider what they may not yet have seen.</p>
+        <p class="launch-only" style="color:var(--obsidian);font-size:1.125rem">Sumanth Namburi is the author of The Other Side Of Nine, a book about how perspective shapes the way we see experiences, relationships and decisions.</p>
+      </div>
+
+      <div class="mt-4 pending" data-reveal>
+        <div class="row-between mb-2"><h3 class="eyebrow">Researched details</h3><span class="draft">All require confirmation</span></div>
+        <dl class="facts">
+          <div><dt class="eyebrow">Home</dt><dd>Born and raised in Hindupur, Andhra Pradesh<span>Source: Google Play author listing</span></dd></div>
+          <div><dt class="eyebrow">Education</dt><dd>MBA<span>Source: Google Play author listing</span></dd></div>
+          <div><dt class="eyebrow">Education work</dt><dd>Director, NSV EDUSPACE — education, skill development and value-based growth<span>Source: Google Play author listing</span></dd></div>
+          <div><dt class="eyebrow">Business</dt><dd>Jewellery entrepreneur<span>Source: PNN press release (syndicated)</span></dd></div>
+          <div><dt class="eyebrow">Community</dt><dd>Rotary International leadership roles; former Assistant Governor, Rotary District 3160<span>Source: Google Play listing; PNN press release</span></dd></div>
+          <div><dt class="eyebrow">Authors’ council</dt><dd>Ambassador and Founding Member, International Council of Authors (ICA)<span>Source: PNN press release (syndicated)</span></dd></div>
+          <div><dt class="eyebrow">Art</dt><dd>Pencil sketching, Tanjore painting, craftwork and digital art<span>Source: Google Play author listing</span></dd></div>
+          <div><dt class="eyebrow">Influences</dt><dd>The Bhagavad Gita, modern psychology, Inner Engineering, Ayyappa Deeksha and Art of Living programmes<span>Source: Google Play author listing</span></dd></div>
+        </dl>
+      </div>
+
+      <div class="mt-4" data-reveal><a href="#book" class="text-link">Discover the book <span aria-hidden="true">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. PRESS (shown only in review mode until verified) ═══════════ -->
+<section class="env-dark pad pending" id="press" aria-labelledby="press-title">
+  <div class="shell">
+    <div class="grid12 sec-head" style="margin-bottom:3.5rem">
+      <p class="eyebrow" data-reveal>Press &amp; recognition</p>
+      <h2 id="press-title" class="display h-lg" data-reveal>In the news.</h2>
+    </div>
+    <ul class="press-list">
+      <li data-reveal>
+        <p class="eyebrow">October 2026</p>
+        <div class="body">
+          <p class="mb-1"><span class="draft">Pending verification</span></p>
+          <h3 class="display">Book launch at ICA Conclave 2026, Goa</h3>
+          <p class="muted mt-1" style="max-width:42rem">The Other Side Of Nine was reported as launched at the International Council of Authors Conclave 2026, with an author award and featured-author recognition.</p>
+          <ul class="outlets">
+            <li><a href="https://pnndigital.com/lifestyle/sumanth-namburi-explores-the-power-of-perspective-in-debut-book-the-other-side-of-nine/" target="_blank" rel="noopener noreferrer">PNN Digital<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://aninews.in/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143209/" target="_blank" rel="noopener noreferrer">ANI (press release)<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.tribuneindia.com/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-2026" target="_blank" rel="noopener noreferrer">The Tribune (press release)<span class="sr-only"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ 8. CONTACT + INSIGHTS ═══════════ -->
+<section class="env-light pad" id="contact" aria-labelledby="contact-title">
+  <div class="shell">
+    <div class="grid12 sec-head">
+      <p class="eyebrow" data-reveal>Contact</p>
+      <h2 id="contact-title" class="display h-lg" data-reveal>Professional enquiries.</h2>
+    </div>
+    <div class="twin">
+      <div data-reveal>
+        <p class="eyebrow">Speaking · Media · Events · Bulk orders</p>
+        <!-- Add confirmed contact details here, e.g. <a href="mailto:...">...</a> -->
+        <p class="display">Contact details will be published here soon.</p>
+        <p class="muted mt-1">Official channels are being confirmed.</p>
+      </div>
+      <div data-reveal id="insights">
+        <p class="eyebrow">Insights</p>
+        <p class="display">Reflections from the author, in time.</p>
+        <p class="muted mt-1">The first insight is still being written.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 9. CLOSING ═══════════ -->
+<section class="closing env-dark" aria-labelledby="closing-title">
+  <div class="shell">
+    <p class="eyebrow mb-2" data-reveal>The Other Side Of Nine</p>
+    <h2 id="closing-title" class="display" data-reveal>Perspective <span class="italic muted">changes everything.</span></h2>
+    <p class="lede mt-2" data-reveal>Available in paperback and on Kindle.</p>
+    <div class="buy centered mt-3" data-reveal>
+      <a class="btn btn-primary" href="https://www.amazon.com/dp/9375008665" target="_blank" rel="noopener noreferrer">Buy Paperback — Amazon US
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="sr-only"> (opens Amazon in a new tab)</span></a>
+      <a class="btn btn-ghost" href="https://www.amazon.in/dp/B0HJ8R9GXW" target="_blank" rel="noopener noreferrer">Get Kindle Edition — Amazon India
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="sr-only"> (opens Amazon in a new tab)</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer env-dark">
+  <div class="shell grid12 footer-top">
+    <div class="footer-brand">
+      <p class="display" style="font-size:1.875rem">Sumanth Namburi</p>
+      <p class="mt-1" style="font-size:.875rem;color:var(--silver)">Author of <cite style="font-style:normal;color:var(--ivory)">The Other Side Of Nine</cite></p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        <li><a href="#book">The Book</a></li>
+        <li><a href="#author">The Author</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li class="pending"><a href="#press">Press</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact" style="font-size:.875rem">
+      <!-- Confirmed email / social links go here -->
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <p>© 2026 Sumanth Namburi. All rights reserved.</p>
+    <p>Published by Clever Fox Publishing.</p>
+  </div>
+</footer>
+
+<!-- ═══════════ LIBRARIES (CDN) ═══════════
+     GSAP + ScrollTrigger for scroll motion; three.js is loaded later, only on capable devices.
+     If any library fails to load, the site still works: content shows statically. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+
+<script type="module">
+/* ═══════════════════════════════════════════════════════════════════
+   SITE SCRIPT
+   ═══════════════════════════════════════════════════════════════════ */
+const THREE_URL = "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js";
+const GLYPH = { d: document.getElementById("nine").getAttribute("d"), minY: -8.6667, maxY: 730 };
+const html = document.documentElement;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isCompact = () => matchMedia("(max-width: 767px)").matches;
+
+/* ─────────────── Header: scrolled state, active section, mobile menu ─────────────── */
+const header = $("#header");
+const onScroll = () => header.classList.toggle("scrolled", scrollY > 24);
+onScroll();
+addEventListener("scroll", onScroll, { passive: true });
+
+const menu = $("#mobile-menu");
+const menuBtn = $("#menu-btn");
+function setMenu(open) {
+  menu.hidden = !open;
+  header.classList.toggle("menu-open", open);
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.querySelector(".sr-only").textContent = open ? "Close menu" : "Open menu";
+  document.body.style.overflow = open ? "hidden" : "";
+  if (open) menu.querySelector("a").focus();
+}
+menuBtn.addEventListener("click", () => setMenu(menu.hidden));
+menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !menu.hidden) { setMenu(false); menuBtn.focus(); }
+});
+matchMedia("(min-width: 768px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
+
+// Highlight the nav item for the section in view.
+const navLinks = $$(".nav a");
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (!en.isIntersecting) return;
+    navLinks.forEach((a) => a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + en.target.id)));
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+["book", "philosophy", "author", "press", "contact", "top", "question", "themes"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+
+/* ─────────────── Motion: wait for GSAP; if it never arrives, show everything ─────────────── */
+function whenGsap() {
+  return new Promise((resolve) => {
+    const ok = () => window.gsap && window.ScrollTrigger;
+    if (ok()) return resolve(true);
+    addEventListener("load", () => resolve(!!ok()), { once: true });
+    setTimeout(() => resolve(!!ok()), 6000);
+  });
+}
+
+const hasGsap = await whenGsap();
+if (!hasGsap || reducedMotion()) {
+  html.classList.add("no-motion");
+  html.classList.remove("js-motion");
+}
+
+let gsap, ScrollTrigger;
+if (hasGsap) {
+  gsap = window.gsap; ScrollTrigger = window.ScrollTrigger;
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+/* Editorial reveals */
+if (hasGsap && !reducedMotion()) {
+  ScrollTrigger.batch("[data-reveal]", {
+    start: "top 88%", once: true,
+    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 1.1, ease: "expo.out", stagger: 0.08, overwrite: true }),
+  });
+
+  /* Split composition: each half turns to the other reading */
+  const origin = "196 -360.67";
+  const st = gsap.timeline({ scrollTrigger: { trigger: "#split", start: "top 75%", end: "bottom 35%", scrub: 0.8 }, defaults: { ease: "none" } });
+  st.fromTo("[data-turn='a']", { rotation: 0, svgOrigin: origin }, { rotation: 180, svgOrigin: origin, ease: "power2.inOut" }, 0)
+    .fromTo("[data-turn='b']", { rotation: 180, svgOrigin: origin }, { rotation: 0, svgOrigin: origin, ease: "power2.inOut" }, 0)
+    .fromTo("[data-divider]", { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: "power2.out" }, 0);
+
+  /* Book: the cover turns gently to face the reader */
+  gsap.fromTo("[data-book]", { rotateY: -24, rotateX: 6, y: 60, scale: 0.94 },
+    { rotateY: 0, rotateX: 0, y: 0, scale: 1, ease: "none", scrollTrigger: { trigger: "#cover-stage", start: "top 90%", end: "center 55%", scrub: 0.8 } });
+}
+
+/* ─────────────── Hero: decide cinematic vs static ─────────────── */
+function capableWebGL() {
+  try {
+    if (new URLSearchParams(location.search).has("force3d")) return true;
+    if ((navigator.deviceMemory && navigator.deviceMemory < 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 2)) return false;
+    const c = document.createElement("canvas");
+    const gl = c.getContext("webgl2") || c.getContext("webgl");
+    if (!gl) return false;
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    // Software renderers would spend seconds of main-thread time on the scene.
+    return !/swiftshader|llvmpipe|software|basic render/i.test(renderer);
+  } catch { return false; }
+}
+
+const hero = $("#top");
+const cinematic = hasGsap && !reducedMotion() && capableWebGL();
+
+/* Shared, render-free state: the scroll timeline writes it, the WebGL scene reads it. */
+const store = { progress: 0, invalidate: null };
+const clamp01 = (v) => Math.min(1, Math.max(0, v));
+const smooth = (a, b, v) => { const t = clamp01((v - a) / (b - a)); return t * t * (3 - 2 * t); };
+function keyframes(frames, p) {
+  if (p <= frames[0][0]) return frames[0][1];
+  for (let i = 0; i < frames.length - 1; i++) {
+    const [p0, v0] = frames[i], [p1, v1] = frames[i + 1];
+    if (p <= p1) return v0 + (v1 - v0) * smooth(p0, p1, p);
+  }
+  return frames[frames.length - 1][1];
+}
+
+if (cinematic) {
+  hero.classList.add("cinematic");
+
+  /* Kinetic title entrance — only while the intro veil still hides the first paint */
+  const veiled = !html.classList.contains("intro-seen") && !html.classList.contains("intro-skip");
+  if (veiled && performance.now() < 900) {
+    const d = Math.max(0.1, 1.05 - performance.now() / 1000);
+    gsap.from("[data-line]", { yPercent: 110, duration: 1.4, ease: "expo.out", stagger: 0.09, delay: d });
+    gsap.from("[data-fade]", { autoAlpha: 0, y: 14, duration: 1.2, ease: "expo.out", stagger: 0.08, delay: d + 0.35 });
+  }
+
+  /* One timeline, scrubbed by scroll, drives captions, the rail, and the 3D camera */
+  const sequence = [[0.17, 0.33], [0.39, 0.57], [0.66, 0.81]];
+  const buildTimeline = () => {
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: { trigger: hero, start: "top top", end: "bottom bottom", scrub: 0.9 },
+      onUpdate: () => { store.progress = tl.progress(); store.invalidate?.(); },
+    });
+    tl.to("[data-intro]", { autoAlpha: 0, y: -56, duration: 0.07, ease: "power2.in" }, 0.015);
+    tl.to("[data-cue]", { autoAlpha: 0, duration: 0.04 }, 0.01);
+    tl.to("[data-veil]", { autoAlpha: 0.25, duration: 0.1 }, 0.03);   // lift the legibility veil once the title has gone
+    sequence.forEach(([at, out], i) => {
+      const sel = `[data-caption="${i}"]`;
+      tl.fromTo(sel, { autoAlpha: 0, y: 28, filter: "blur(6px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.06, ease: "power2.out" }, at)
+        .to(sel, { autoAlpha: 0, y: -28, filter: "blur(6px)", duration: 0.05, ease: "power2.in" }, out);
+    });
+    tl.fromTo("[data-finale] .w > span", { autoAlpha: 0, yPercent: 60 }, { autoAlpha: 1, yPercent: 0, duration: 0.07, stagger: 0.012, ease: "power3.out" }, 0.86);
+    tl.fromTo("[data-rail]", { scaleY: 0 }, { scaleY: 1, duration: 1 }, 0);
+    tl.set({}, {}, 1);
+    return tl;
+  };
+  buildTimeline();
+  ScrollTrigger.refresh();
+
+  /* Mount the WebGL scene when the browser is idle, so it never competes with first paint */
+  const mount = () => initScene().catch((err) => {
+    console.warn("3D scene unavailable, using static composition:", err);
+    hero.classList.remove("ready");
+  });
+  if ("requestIdleCallback" in window) requestIdleCallback(mount, { timeout: 1500 });
+  else setTimeout(mount, 600);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   THE SIX / NINE SCENE
+   The "9" from Instrument Serif, cast in champagne metal, lies flat between
+   two vantage points engraved on the ground. The camera begins at a grazing
+   angle (only an edge of light), rises until it reads as a nine, then walks
+   a half-circle to the other side — where the very same object reads as a
+   six. It is one object seen from another side, not a separate "6" model.
+   Frames render only when scroll progress changes.
+   ═══════════════════════════════════════════════════════════════════ */
+async function initScene() {
+  const THREE = await import(THREE_URL);
+  const compact = isCompact();
+  const container = $("#scene");
+  const CHAMPAGNE = 0xbda47d;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, compact ? 1.5 : 1.75));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.setClearColor(0x101114);
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x101114, 7, 17);
+  const camera = new THREE.PerspectiveCamera(compact ? 36 : 30, 1, 0.1, 80);
+
+  /* Environment for metal reflections: a few soft light panels baked to a PMREM */
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const env = new THREE.Scene();
+  const panel = (color, intensity, pos, scale, circle = false) => {
+    const geo = circle ? new THREE.CircleGeometry(0.5, 32) : new THREE.PlaneGeometry(1, 1);
+    const mat = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide });
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(...pos); m.scale.set(scale[0], scale[1], 1); m.lookAt(0, 0, 0);
+    env.add(m);
+  };
+  panel(0xf6efe2, 2.2, [0, 5, -4], [10, 2]);
+  panel(0xf6efe2, 2.2, [0, 5, 4], [10, 2]);
+  panel(0xbda47d, 1.1, [-5, 2, 3], [8, 1.5]);
+  panel(0xb8c2d0, 0.8, [5, 1.5, 2], [8, 1]);
+  panel(0xffffff, 1.4, [0, 8, 0], [3, 3], true);
+  scene.environment = pmrem.fromScene(env, 0.04).texture;
+
+  /* Lights */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.22));
+  const key = new THREE.DirectionalLight(0xf3ead8, 2);
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0x9fb1c8, 0.35);
+  fill.position.set(-4, 3, -6);
+  scene.add(fill);
+
+  /* Ground, axis between the two vantage points, ring */
+  const flat = (mesh, y) => { mesh.rotation.x = -Math.PI / 2; mesh.position.y = y; scene.add(mesh); return mesh; };
+  flat(new THREE.Mesh(new THREE.CircleGeometry(18, 96), new THREE.MeshStandardMaterial({ color: 0x121316, roughness: 0.94, metalness: 0 })), 0);
+  flat(new THREE.Mesh(new THREE.PlaneGeometry(0.012, 9.5), new THREE.MeshBasicMaterial({ color: CHAMPAGNE, transparent: true, opacity: 0.2 })), 0.003);
+  flat(new THREE.Mesh(new THREE.RingGeometry(2.55, 2.562, 160), new THREE.MeshBasicMaterial({ color: CHAMPAGNE, transparent: true, opacity: 0.16 })), 0.003);
+
+  const vantages = [3.3, -3.3].map((z) => {
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.RingGeometry(0.2, 0.215, 64), new THREE.MeshBasicMaterial({ color: CHAMPAGNE, transparent: true, opacity: 0.7 })));
+    g.add(new THREE.Mesh(new THREE.CircleGeometry(0.045, 32), new THREE.MeshBasicMaterial({ color: CHAMPAGNE, transparent: true, opacity: 0.85 })));
+    g.rotation.x = -Math.PI / 2; g.position.set(0, 0.004, z);
+    scene.add(g);
+    return g;
+  });
+
+  /* Soft contact shadow under the numeral (a blurred radial gradient) */
+  const sc = document.createElement("canvas"); sc.width = sc.height = 128;
+  const sx = sc.getContext("2d");
+  const grad = sx.createRadialGradient(64, 64, 4, 64, 64, 64);
+  grad.addColorStop(0, "rgba(0,0,0,0.85)"); grad.addColorStop(0.55, "rgba(0,0,0,0.35)"); grad.addColorStop(1, "rgba(0,0,0,0)");
+  sx.fillStyle = grad; sx.fillRect(0, 0, 128, 128);
+  const shadow = flat(new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false })), 0.002);
+  shadow.scale.set(2.6, 4.4, 1);
+
+  /* The numeral: parse the font outline (M / Q / Z commands) into shapes and extrude */
+  const sp = new THREE.ShapePath();
+  const tokens = GLYPH.d.match(/[MQZ]|-?\d*\.?\d+(?:e-?\d+)?/gi);
+  for (let i = 0; i < tokens.length;) {
+    const c = tokens[i++];
+    if (c === "M") { sp.moveTo(+tokens[i++], +tokens[i++]); }
+    else if (c === "Q") { const a = +tokens[i++], b = +tokens[i++], x = +tokens[i++], y = +tokens[i++]; sp.quadraticCurveTo(a, b, x, y); }
+    // "Z" closes the contour; ShapePath starts a new sub-path at the next "M".
+  }
+  const geometry = new THREE.ExtrudeGeometry(sp.toShapes(), {
+    depth: 64, bevelEnabled: true, bevelThickness: 7, bevelSize: 4.5,
+    bevelSegments: compact ? 3 : 5, curveSegments: compact ? 12 : 22,
+  });
+  geometry.center();
+  geometry.computeVertexNormals();
+  const s = 3.1 / (GLYPH.maxY - GLYPH.minY);
+  const material = new THREE.MeshPhysicalMaterial({ color: CHAMPAGNE, metalness: 1, roughness: 0.26, clearcoat: 0.35, clearcoatRoughness: 0.4, envMapIntensity: compact ? 2.1 : 1.7 });
+  const nine = new THREE.Mesh(geometry, material);
+  nine.scale.setScalar(s);
+  nine.rotation.x = -Math.PI / 2;           // face up; the top of the 9 points north (−z)
+  nine.position.y = (64 * s) / 2 + 0.02;
+  scene.add(nine);
+
+  /* Camera path and raking light, driven by scroll progress */
+  const target = new THREE.Vector3();
+  function frame() {
+    const p = store.progress;
+    const { clientWidth: w, clientHeight: h } = container;
+    const aspect = w / h;
+    const fit = aspect < 1 ? 1 + (1 - aspect) * 0.9 : 1;
+    scene.fog.near = 7 * fit; scene.fog.far = 17 * fit;   // a farther (portrait) camera must not sink the numeral into fog
+    const theta = keyframes([[0.34, 0], [0.8, Math.PI]], p);
+    const ch = keyframes([[0, 0.32], [0.26, 4.5], [0.57, 5.6], [0.86, 4.6], [1, 6.6]], p);
+    const r = keyframes([[0, 4.4], [0.26, 6.1], [0.57, 6.7], [0.86, 5.9], [1, 7.4]], p) * fit * (compact ? 1.05 : 1);
+    const lookY = keyframes([[0, 0.12], [0.26, 0.7], [0.86, 0.7], [1, -0.75]], p);
+    camera.position.set(Math.sin(theta) * r, ch, Math.cos(theta) * r);
+    target.set(0, lookY, 0);
+    camera.lookAt(target);
+    const phi = theta + keyframes([[0, 1.9], [0.3, 0.9]], p);
+    key.position.set(Math.sin(phi) * 6, keyframes([[0, 0.9], [0.3, 6]], p), Math.cos(phi) * 6);
+    key.intensity = keyframes([[0, 1.6], [0.22, 3.4]], p);
+    vantages.forEach((v) => (v.visible = p > 0.18));
+    renderer.render(scene, camera);
+  }
+
+  let queued = false;
+  store.invalidate = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; frame(); });
+  };
+
+  const resize = () => {
+    const { clientWidth: w, clientHeight: h } = container;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    store.invalidate();
+  };
+  new ResizeObserver(resize).observe(container);
+  resize();
+  requestAnimationFrame(() => hero.classList.add("ready"));
+}
+</script>
+</body>
+</html>
