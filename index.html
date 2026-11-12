@@ -892,13 +892,16 @@ a.store[href^="http"]:hover{padding-inline:.9rem;background:color-mix(in srgb, v
 .press-list{grid-column:6 / span 7;border-top:1px solid var(--divider)}
 .press-item{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:.25rem var(--gutter);padding-block:1.15rem;border-bottom:1px solid var(--divider);align-items:baseline}
 .press-item time{grid-column:1;font-size:.8125rem;color:var(--text-2);font-variant-numeric:tabular-nums}
-.press-item .outlet{grid-column:1;font:600 .9375rem/1.3 var(--f-text);display:flex;align-items:center;gap:.75rem}
+.press-item .outlet{grid-column:1;justify-self:start;margin-top:.35rem}
+.press-item a.outlet{width:3rem;height:3rem;font-size:.8125rem;border-radius:10px;box-shadow:0 1px 2px rgba(31,30,28,.12);transition:transform .2s ease,box-shadow .2s ease}
+.press-item a.outlet:hover{transform:translateY(-2px);box-shadow:0 6px 16px -6px rgba(31,30,28,.35),0 0 0 2px var(--gold)}
+.press-item a.outlet:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .p-logo{flex:none;width:2.5rem;height:2.5rem;border-radius:8px;display:grid;place-items:center;overflow:hidden;background:var(--bg-2);border:1px solid var(--divider);font:700 .625rem/1 var(--f-text);letter-spacing:.02em;color:var(--text-2)}
 .p-logo.has-logo{background:#fff;border-color:transparent}
 .p-logo img{width:100%;height:100%;object-fit:contain}
-.press-item a{grid-column:2;grid-row:1 / span 2;font:400 clamp(1.05rem, 1rem + .25vw, 1.2rem)/1.4 var(--f-head);text-decoration-color:var(--divider)}
-.press-item a:hover{text-decoration-color:var(--gold)}
-.press-item a .i{display:inline-block;vertical-align:-.12em;margin-left:.35rem;color:var(--accent)}
+.press-item a.headline{grid-column:2;grid-row:1 / span 2;font:400 clamp(1.05rem, 1rem + .25vw, 1.2rem)/1.4 var(--f-head);text-decoration-color:var(--divider)}
+.press-item a.headline:hover{text-decoration-color:var(--gold)}
+.press-item a.headline .i{display:inline-block;vertical-align:-.12em;margin-left:.35rem;color:var(--accent)}
 
 /* ==========================================================================
    12 ARTIST — an index of mediums, then an uneven gallery
@@ -1174,7 +1177,7 @@ a.channel[href]:hover{padding-inline:.6rem;background:color-mix(in srgb, var(--g
   .medium .swatch{grid-column:2;grid-row:3;height:2.6rem;width:60%}
   .areas{grid-template-columns:1fr}
   .press-item{grid-template-columns:1fr}
-  .press-item a{grid-column:auto;grid-row:auto}
+  .press-item a.headline{grid-column:auto;grid-row:auto}
   .areas{grid-template-columns:1fr}
   .timeline li{grid-template-columns:2.5rem minmax(0,1fr)}
   .quote{margin-left:0}
@@ -1617,18 +1620,18 @@ a.channel[href]:hover{padding-inline:.6rem;background:color-mix(in srgb, var(--g
       <p class="small">The book was launched at ICA Conclave 2026 in Goa, organised by the International Council of Authors. These articles carry one press release, distributed by PNN.</p>
     </div>
     <ul class="press-list" data-reveal="stagger">
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="pnn" aria-hidden="true"></span>PNN Digital</span>
-        <a href="https://pnndigital.com/lifestyle/sumanth-namburi-explores-the-power-of-perspective-in-debut-book-the-other-side-of-nine/" target="_blank" rel="noopener noreferrer">Sumanth Namburi Explores the Power of Perspective in Debut Book ‘The Other Side Of Nine’<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="ani" aria-hidden="true"></span>ANI</span>
-        <a href="https://aninews.in/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143209/" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="tribune" aria-hidden="true"></span>The Tribune</span>
-        <a href="https://www.tribuneindia.com/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-2026" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="ahmedabad-mirror" aria-hidden="true"></span>Ahmedabad Mirror</span>
-        <a href="https://www.ahmedabadmirror.com/the-other-side-of-nine-by-sumanth-namburi-unveiled-at-ica-conclave-2026/81923427.html" target="_blank" rel="noopener noreferrer">‘The Other Side Of Nine’ by Sumanth Namburi Unveiled at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="webindia123" aria-hidden="true"></span>WebIndia123</span>
-        <a href="https://news.webindia123.com/news/Articles/Business/20261007/4508159.html" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
-      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><span class="outlet"><span class="p-logo" data-press="washington-dc-despatch" aria-hidden="true"></span>Washington DC Despatch</span>
-        <a href="https://www.washingtondcdespatch.com/news/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143204/" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="pnn" data-name="PNN Digital" href="https://pnndigital.com/lifestyle/sumanth-namburi-explores-the-power-of-perspective-in-debut-book-the-other-side-of-nine/" target="_blank" rel="noopener noreferrer" title="Read on PNN Digital" aria-label="PNN Digital: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://pnndigital.com/lifestyle/sumanth-namburi-explores-the-power-of-perspective-in-debut-book-the-other-side-of-nine/" target="_blank" rel="noopener noreferrer">Sumanth Namburi Explores the Power of Perspective in Debut Book ‘The Other Side Of Nine’<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="ani" data-name="ANI" href="https://aninews.in/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143209/" target="_blank" rel="noopener noreferrer" title="Read on ANI" aria-label="ANI: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://aninews.in/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143209/" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="tribune" data-name="The Tribune" href="https://www.tribuneindia.com/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-2026" target="_blank" rel="noopener noreferrer" title="Read on The Tribune" aria-label="The Tribune: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://www.tribuneindia.com/news/business/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-2026" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="ahmedabad-mirror" data-name="Ahmedabad Mirror" href="https://www.ahmedabadmirror.com/the-other-side-of-nine-by-sumanth-namburi-unveiled-at-ica-conclave-2026/81923427.html" target="_blank" rel="noopener noreferrer" title="Read on Ahmedabad Mirror" aria-label="Ahmedabad Mirror: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://www.ahmedabadmirror.com/the-other-side-of-nine-by-sumanth-namburi-unveiled-at-ica-conclave-2026/81923427.html" target="_blank" rel="noopener noreferrer">‘The Other Side Of Nine’ by Sumanth Namburi Unveiled at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="webindia123" data-name="WebIndia123" href="https://news.webindia123.com/news/Articles/Business/20261007/4508159.html" target="_blank" rel="noopener noreferrer" title="Read on WebIndia123" aria-label="WebIndia123: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://news.webindia123.com/news/Articles/Business/20261007/4508159.html" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
+      <li class="press-item"><time datetime="2026-10-07">7 Oct 2026</time><a class="outlet p-logo" data-press="washington-dc-despatch" data-name="Washington DC Despatch" href="https://www.washingtondcdespatch.com/news/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143204/" target="_blank" rel="noopener noreferrer" title="Read on Washington DC Despatch" aria-label="Washington DC Despatch: read the article (opens in a new tab)"></a>
+        <a class="headline" href="https://www.washingtondcdespatch.com/news/mr-sumanth-namburi-launched-his-debut-book-the-other-side-of-nine-at-ica-conclave-202620261007143204/" target="_blank" rel="noopener noreferrer">Mr. Sumanth Namburi Launched His Debut Book The Other Side Of Nine at ICA Conclave 2026<svg class="i i-sm" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr">(opens in a new tab)</span></a></li>
     </ul>
   </div>
 </section>
@@ -1871,8 +1874,8 @@ var SITE = {
   /* ---------------------------------------------------------------- press logos (lettermark until a logo is supplied) */
   d.querySelectorAll('.p-logo[data-press]').forEach(function (slot) {
     var src = (SITE.pressLogos || {})[slot.getAttribute('data-press')];
-    var name = slot.parentNode.textContent.trim().replace(/^The /, '');
-    if (src) { var im = el('img'); im.src = src; im.alt = ''; im.width = 40; im.height = 40; im.decoding = 'async'; slot.appendChild(im); slot.classList.add('has-logo'); }
+    var name = (slot.getAttribute('data-name') || '').replace(/^The /, '');
+    if (src) { var im = el('img'); im.src = src; im.alt = ''; im.width = 48; im.height = 48; im.decoding = 'async'; slot.appendChild(im); slot.classList.add('has-logo'); }
     else { slot.textContent = name.split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase(); }
   });
 
